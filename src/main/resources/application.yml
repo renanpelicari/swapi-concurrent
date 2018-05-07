@@ -1,0 +1,40 @@
+info:
+  app:
+    name: Concurrent/Async POC
+    description: POC to show how to perform async requests to Star Wars API
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /actuator
+
+swapi-client:
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: swapi.co:443
+    ServerListRefreshInterval: 15000
+
+feign:
+  hystrix:
+    enabled: true
+  okhttp:
+      enabled: true
+
+ribbon:
+  ReadTimeout: 30000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+  metrics:
+    enabled: false
