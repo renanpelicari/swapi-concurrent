@@ -13,28 +13,39 @@ management:
         include: '*'
       base-path: /actuator
 
+# Ribbon - Client load balancer config
 swapi-client:
   ribbon:
-    eureka:
-      enabled: false
     listOfServers: swapi.co:443
-    ServerListRefreshInterval: 15000
-
-feign:
-  hystrix:
-    enabled: true
-  okhttp:
-      enabled: true
 
 ribbon:
-  ReadTimeout: 30000
+  IsSecure: true
+  SecurePort: 443
+  eureka:
+   enabled: false
 
+feign:
+  client:
+    config:
+      swapi-client:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+
+# To disable Hystrix in Feign
+feign:
+  hystrix:
+    enabled: false
+
+# To set thread isolation to SEMAPHORE
 hystrix:
   command:
     default:
       execution:
         isolation:
-          thread:
-            timeoutInMilliseconds: 30000
-  metrics:
-    enabled: false
+          strategy: SEMAPHORE
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3

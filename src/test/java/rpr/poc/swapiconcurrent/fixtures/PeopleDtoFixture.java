@@ -13,7 +13,11 @@ import java.util.stream.IntStream;
 public class PeopleDtoFixture {
 
     public static List<PeopleDto> getPeopleDtoList(final int size) {
-        return IntStream.range(0, size).mapToObj(PeopleDtoFixture::getPeopleDto).collect(Collectors.toList());
+        return getPeopleDtoList(size, 0);
+    }
+
+    public static List<PeopleDto> getPeopleDtoList(final int size, final int startsWith) {
+        return IntStream.range(startsWith, size).mapToObj(PeopleDtoFixture::getPeopleDto).collect(Collectors.toList());
     }
 
     public static List<PeopleDto> getPeopleDtoInvalidList() {

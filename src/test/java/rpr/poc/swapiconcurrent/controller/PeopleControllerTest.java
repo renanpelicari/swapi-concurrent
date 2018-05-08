@@ -30,7 +30,7 @@ public class PeopleControllerTest {
     @MockBean
     private PeopleService peopleService;
 
-    private final String ENDPOINT_URL = "/application/api/people";
+    private static final String ENDPOINT_URL = "/application/api/people";
 
     @Test
     public void testFindAllSuccess() throws Exception {
@@ -41,5 +41,4 @@ public class PeopleControllerTest {
             .andExpect(content().json(PeopleVoFixture.getPeopleJsonList(3)));
         verify(peopleService).findAll();
     }
-
 }

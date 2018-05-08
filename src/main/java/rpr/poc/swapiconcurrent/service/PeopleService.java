@@ -49,8 +49,7 @@ public class PeopleService {
         final List<Callable<List<PeopleDto>>> callables = Arrays.asList(
             () -> starWarsClient.fetchCharacters(1),
             () -> starWarsClient.fetchCharacters(2),
-            () -> starWarsClient.fetchCharacters(3),
-            () -> starWarsClient.fetchCharacters(4));
+            () -> starWarsClient.fetchCharacters(3));
 
         final List<PeopleDto> peopleDtos = getPeopleDtosByCallables(callables);
         return PeopleConverter.peopleDtoToVo(peopleDtos);
